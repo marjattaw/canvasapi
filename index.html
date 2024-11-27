@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzion pakoretki</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Aloitusruutu -->
+    <div id="startScreen">
+        <h2>Tervetuloa Enzion pakoretki -peliin!</h2>
+        <p>Ohjaa Enziota väistämään esteitä samalla pisteitä keräten!</p>
+        <button id="startGameButton">Aloita peli</button>
+    </div>
+
+    <!-- Pisteiden näyttö -->
+    <div id="scoreBoard" style="display: none;">
+        <p id="score">Pisteet: 0</p>
+        <button id="resetGameButton" style="display: none;">Aloita alusta</button>
+    </div>
+
+    <!-- Canvas -->
+    <canvas id="gameCanvas" width="800" height="400" style="display: none;"></canvas>
+
+    <script>
+        // Käynnistää pelin ja hallitsee elementtien näyttämistä/piilottamista
+        document.getElementById("startGameButton").addEventListener("click", function () {
+            // Piilota aloitusruutu
+            document.getElementById("startScreen").style.display = "none";
+
+            // Näytä pisteet ja canvas
+            document.getElementById("scoreBoard").style.display = "block";
+            document.getElementById("gameCanvas").style.display = "block";
+
+            // Näytä Aloita alusta -nappi
+            document.getElementById("resetGameButton").style.display = "inline-block";
+
+            // Aloita pelilogiikka
+            startGame();
+        });
+
+        // Aloita alusta -napin toiminnallisuus
+        document.getElementById("resetGameButton").addEventListener("click", function () {
+            resetGame(); // Nollaa pelin tila
+            startGame(); // Aloita peli alusta
+        });
+
+        function startGame() {
+            // Tässä kohtaa voit aloittaa pelin logiikan
+            console.log("Peli alkaa!");
+            updateGame(); // Kutsutaan pelin päivitysfunktiota
+        }
+
+        function resetGame() {
+            // Nollaa kaikki pelin muuttujat ja tyhjennä tila
+            console.log("Peli nollattu!");
+            score = 0;
+            gameSpeed = 3;
+            obstacles.length = 0; // Tyhjennä esteet
+            player.y = canvas.height - player.height;
+            document.getElementById("score").textContent = "Pisteet: " + score;
+
+            // Tyhjennä canvas
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+
+    <!-- Pelilogiikan script-tiedosto -->
+    <script src="loputonjuoksija.js"></script>
+</body>
+</html>
